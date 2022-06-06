@@ -18,27 +18,27 @@ void PrintArray(int* a, int n)
 }
 
 
-// ²åÈëÅÅĞò
+// æ’å…¥æ’åº
 void InsertSort(int* a, int n)
 {
 	assert(a);
-	//¶àÌËÅÅĞò
-	//ÕâÀï¾¡Á¿ÓÃforÑ­»·£¬ÒòÎªwhileÑ­»·ÉÔÎ¢ÂıÒ»µã£¬Ô¤ÅĞÌõ¼şÓëÊµ¼Ê²»·ûµÄ»°²»×¼¾Í»áÂı
+	//å¤šè¶Ÿæ’åº
+	//è¿™é‡Œå°½é‡ç”¨forå¾ªç¯ï¼Œå› ä¸ºwhileå¾ªç¯ç¨å¾®æ…¢ä¸€ç‚¹ï¼Œé¢„åˆ¤æ¡ä»¶ä¸å®é™…ä¸ç¬¦çš„è¯ä¸å‡†å°±ä¼šæ…¢
 	for (int i = 0; i < n - 1; i++)
 	{
-		//°Ñi+1µÄÎ»ÖÃÌÍ³öÀ´µ±×÷±È½ÏµÄ¶ÔÏó
+		//æŠŠi+1çš„ä½ç½®æå‡ºæ¥å½“ä½œæ¯”è¾ƒçš„å¯¹è±¡
 		int end = i;
 		int temp = a[end + 1];
-		//ÒÀ´ÎÏòÇ°±È
+		//ä¾æ¬¡å‘å‰æ¯”
 		while (end >= 0)
 		{
-			//Èç¹û±ÈendÎ»ÖÃĞ¡£¬endÍùºóÅ²£¬¼ÌĞøÏòÇ°±È
+			//å¦‚æœæ¯”endä½ç½®å°ï¼Œendå¾€åæŒªï¼Œç»§ç»­å‘å‰æ¯”
 			if (temp < a[end])
 			{
 				a[end + 1] = a[end];
 				end--;
 			}
-			//Ö±µ½²»±ÈendĞ¡£¬¾ÍÕÒµ½ÁË×Ô¼ºÓ¦¸ÃÔÚµÄÎ»ÖÃ
+			//ç›´åˆ°ä¸æ¯”endå°ï¼Œå°±æ‰¾åˆ°äº†è‡ªå·±åº”è¯¥åœ¨çš„ä½ç½®
 			else
 			{
 				break;
@@ -48,25 +48,25 @@ void InsertSort(int* a, int n)
 	}
 }
 
-// Ï£¶ûÅÅĞò
+// å¸Œå°”æ’åº
 void ShellSort(int* a, int n)
 {
 	assert(a);
-	//ÏÈ¶ÔgapÇø¼äµÄÊıÔ¤ÅÅĞò£¬È»ºóÔÙ¼õÉÙgapµÄ´óĞ¡£¬×îºóÖ±µ½gapÎª1£¨²»ÄÜÎª0£©Ò²¾ÍÊÇ²åÈëÅÅĞò¡£
+	//å…ˆå¯¹gapåŒºé—´çš„æ•°é¢„æ’åºï¼Œç„¶åå†å‡å°‘gapçš„å¤§å°ï¼Œæœ€åç›´åˆ°gapä¸º1ï¼ˆä¸èƒ½ä¸º0ï¼‰ä¹Ÿå°±æ˜¯æ’å…¥æ’åºã€‚
 	int gap = n;
 	while (gap > 1)
 	{
-		gap = gap / 3 + 1; //ÕâÀïÒª¼Ó1ÒòÎªÓĞ¿ÉÄÜ±ä³É0¡£gap²»ÄÜ³ıÒÔ2ÒòÎª»áËÀÑ­»·£¨2/2 +1 = 1£¬ 1/2 +1 = 1£©
-		//¶àÌËÑ­»·
+		gap = gap / 3 + 1; //è¿™é‡Œè¦åŠ 1å› ä¸ºæœ‰å¯èƒ½å˜æˆ0ã€‚gapä¸èƒ½é™¤ä»¥2å› ä¸ºä¼šæ­»å¾ªç¯ï¼ˆ2/2 +1 = 1ï¼Œ 1/2 +1 = 1ï¼‰
+		//å¤šè¶Ÿå¾ªç¯
 		for (int i = 0; i < n - gap; i++)
 		{
-			//Ã¿Ò»ÌËÑ­»·
+			//æ¯ä¸€è¶Ÿå¾ªç¯
 			int end = i;
-			//tempµÈÓÚend¼ÓÉÏgapÇø¼ä
+			//tempç­‰äºendåŠ ä¸ŠgapåŒºé—´
 			int temp = a[i + gap];
 			while (end >= 0)
 			{
-				//Èç¹û±Ètemp´ó¾Í°Ñ´óµÄ¶ªµ½ºóÃæ
+				//å¦‚æœæ¯”tempå¤§å°±æŠŠå¤§çš„ä¸¢åˆ°åé¢
 				if (a[end] > temp)
 				{
 					a[end + gap] = a[end];
@@ -82,16 +82,16 @@ void ShellSort(int* a, int n)
 	}
 }
 
-//Ñ¡ÔñÅÅĞò
+//é€‰æ‹©æ’åº
 void SelectSort(int* a, int n)
 {
 	int largeIndex, smallIndex, left = 0, right = n - 1;
-	//¶àÌËÑ­»·
+	//å¤šè¶Ÿå¾ªç¯
 	while (right > left)
 	{
 		smallIndex = largeIndex = left;
-		//Ã¿Ò»ÌËÑ­»·
-		//±éÀúÕÒ³ö×î´óºÍ×îĞ¡µÄÊı
+		//æ¯ä¸€è¶Ÿå¾ªç¯
+		//éå†æ‰¾å‡ºæœ€å¤§å’Œæœ€å°çš„æ•°
 		for (int i = left; i <= right; i++)
 		{
 			if (a[i] < a[smallIndex])
@@ -103,10 +103,10 @@ void SelectSort(int* a, int n)
 				largeIndex = i;
 			}
 		}
-		//ÕÒ³öÀ´ºó°ÑĞ¡µÄºÍ×î×ó±ß½»»»£¬´óµÄºÍ×îÓÒ±ß½»»»
+		//æ‰¾å‡ºæ¥åæŠŠå°çš„å’Œæœ€å·¦è¾¹äº¤æ¢ï¼Œå¤§çš„å’Œæœ€å³è¾¹äº¤æ¢
 		Swap(&a[left], &a[smallIndex]);
-		//Èç¹û×î´óµÄÔÚ×î×ó±ß£¬µ«ÊÇ×î×ó±ßµÄÖµÒÑ¾­±»»»×ßÁË
-		//ÄÇ¾Í°Ñ±»»»×ßµÄÎ»ÖÃ¸³¸ø×î´óµÄindexÈ»ºóÔÙ½»»»
+		//å¦‚æœæœ€å¤§çš„åœ¨æœ€å·¦è¾¹ï¼Œä½†æ˜¯æœ€å·¦è¾¹çš„å€¼å·²ç»è¢«æ¢èµ°äº†
+		//é‚£å°±æŠŠè¢«æ¢èµ°çš„ä½ç½®èµ‹ç»™æœ€å¤§çš„indexç„¶åå†äº¤æ¢
 		if (largeIndex == left)
 		{
 			largeIndex = smallIndex;
@@ -116,42 +116,42 @@ void SelectSort(int* a, int n)
 		right--;
 	}
 }
-//½¨´ó¶Ñ
+//å»ºå¤§å †
 void AdjustDwon(int* a, int n, int root)
 {
 	int parent = root;
 	int child = root * 2 + 1;
 	while (child < n)
 	{
-		//Ñ¡³ö×î´óµÄº¢×Ó
+		//é€‰å‡ºæœ€å¤§çš„å­©å­
 		if(child +1 < n && a[child+1] > a[child])
 		{
 			child++;
 		}
-		//Èç¹û¸¸Ç×±Èº¢×ÓĞ¡£¬¾Í»»ÏÂÈ¥£¬°Ñ´óº¢×Ó»»ÉÏÀ´
+		//å¦‚æœçˆ¶äº²æ¯”å­©å­å°ï¼Œå°±æ¢ä¸‹å»ï¼ŒæŠŠå¤§å­©å­æ¢ä¸Šæ¥
 		if (a[parent] < a[child])
 		{
 			Swap(&a[parent], &a[child]);
 			parent = child;
 			child = parent * 2 + 1;
 		}
-		//Èç¹û¸¸Ç×Ğ¡ÓÚº¢×Ó£¬¾Í²»ÓÃµ÷ÕûÁË
+		//å¦‚æœçˆ¶äº²å°äºå­©å­ï¼Œå°±ä¸ç”¨è°ƒæ•´äº†
 		else
 		{
 			break;
 		}
 	}
 }
-//¶ÑÅÅĞò
+//å †æ’åº
 void HeapSort(int* a, int n)
 {
-	//ÏÈ½¨¶Ñ
-	//×îºóÒ»¸ö¸¸Ç×µÄ½ÚµãÊÇ×îºóÒ»¸öº¢×ÓµÄ½Úµã-1/2
+	//å…ˆå»ºå †
+	//æœ€åä¸€ä¸ªçˆ¶äº²çš„èŠ‚ç‚¹æ˜¯æœ€åä¸€ä¸ªå­©å­çš„èŠ‚ç‚¹-1/2
 	for (int i = (n - 1 - 1) >> 1; i>=0 ;i--)
 	{
 		AdjustDwon(a, n, i);
 	}
-	//½¨ºÃ¶Ñºó°Ñ×î´óµÄºÍ×îºóÒ»¸öÎ»ÖÃ½»»»£¬È»ºó--ĞèÒªÅÅĞòµÄ£¬ÏòÏÂµ÷Õû
+	//å»ºå¥½å †åæŠŠæœ€å¤§çš„å’Œæœ€åä¸€ä¸ªä½ç½®äº¤æ¢ï¼Œç„¶å--éœ€è¦æ’åºçš„ï¼Œå‘ä¸‹è°ƒæ•´
 	int end = n - 1;
 	while (end > 0)
 	{
@@ -161,7 +161,7 @@ void HeapSort(int* a, int n)
 	}
 }
 
-// Ã°ÅİÅÅĞò
+// å†’æ³¡æ’åº
 void BubbleSort(int* a, int n)
 {
 	for (int i = 0; i < n-1; i++)
@@ -176,6 +176,37 @@ void BubbleSort(int* a, int n)
 	}
 }
 
-//¿ìÅÅ
-void QuickSort(int* a, int n);
+//hoareåˆ†æ²»æ³•
+int PartSort1(int* a, int left, int right)
+{
+	int key = a[left];
+	int begin = left;
+	while (left < right)
+	{
+		while (right > left && a[right] >= key)
+		{
+			right--;
+		}
+		while (left < right && a[left] <= key)
+		{
+			left++;
+		}
+		Swap(&a[left], &a[right]);
+	}
+	Swap(&a[left], &a[begin]);
+	return left;
+}
+
+
+void _QuickSort(int* a, int left, int right)
+{
+	if (left >= right)
+	{
+		return;
+	}
+	int key = PartSort1(a, left, right);
+	_QuickSort(a, left, key - 1);
+	_QuickSort(a, key + 1, right);
+}
+
 
