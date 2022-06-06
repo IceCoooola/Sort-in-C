@@ -180,23 +180,69 @@ void BubbleSort(int* a, int n)
 int PartSort1(int* a, int left, int right)
 {
 	int key = a[left];
+	//选最左边的值当作key
 	int begin = left;
+	//记录最左边的位置
 	while (left < right)
+	{
+		//右指针去找小于key的
+		while (right > left && a[right] >= key)
+		{
+			right--;
+		}
+		//左指针去找大于key的
+		while (left < right && a[left] <= key)
+		{
+			left++;
+		}
+		//交换
+		Swap(&a[left], &a[right]);
+	}
+	//最后把key和当前位置交换
+	Swap(&a[left], &a[begin]);
+	return left;
+}
+
+//挖坑法
+int PartSort2(int* a, int left, int right)
+{
+	//把最左边的位置当作坑
+	int key = a[left];
+	while (right > left)
 	{
 		while (right > left && a[right] >= key)
 		{
 			right--;
 		}
-		while (left < right && a[left] <= key)
+		a[left] = a[right];
+		while(left < right && a[left] <= key)
 		{
 			left++;
 		}
-		Swap(&a[left], &a[right]);
+		a[right] = a[left];
 	}
-	Swap(&a[left], &a[begin]);
+	a[left] = key;
 	return left;
 }
 
+//前后指针法
+int PartSort3(int* a, int left, int right)
+{
+	int key = a[left];
+	int prev = left;
+	int cur = left + 1;
+	while (cur <= right)
+	{
+		// cur找小，把小的往前翻，大的往后翻
+		if (a[cur] < key && ++prev != cur)
+		{
+			Swap(&a[prev], &a[cur]);
+		}
+		cur++;
+	}
+	Swap(&a[prev], &a[left]);
+	return prev;
+}
 
 void _QuickSort(int* a, int left, int right)
 {
@@ -204,9 +250,16 @@ void _QuickSort(int* a, int left, int right)
 	{
 		return;
 	}
-	int key = PartSort1(a, left, right);
+	int key = PartSort3(a, left, right);
 	_QuickSort(a, left, key - 1);
 	_QuickSort(a, key + 1, right);
 }
+
+//快排
+void QuickSort(int* a, int n)
+{
+	_QuickSort(a, 0, n - 1);
+}
+
 
 
