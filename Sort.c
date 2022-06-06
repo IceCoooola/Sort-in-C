@@ -258,8 +258,40 @@ void _QuickSort(int* a, int left, int right)
 //快排
 void QuickSort(int* a, int n)
 {
-	_QuickSort(a, 0, n - 1);
+	//_QuickSort(a, 0, n - 1);
+	QuickSortNonR(a, 0, n - 1);
 }
 
 
+
+//非递归快排
+void QuickSortNonR(int* a, int left, int right)
+{
+	Stack st;
+	InitStack(&st);
+
+	PushStack(&st, right);
+	PushStack(&st, left);
+	
+	while (!IsEmptyStack(&st))
+	{
+		int begin = TopStack(&st);
+		PopStack(&st);
+		int end = TopStack(&st);
+		PopStack(&st);
+		int key = PartSort1(a, begin, end);
+		if (key-1 > begin)
+		{
+			PushStack(&st, key - 1);
+			PushStack(&st, begin);
+		}
+		if (key+1 < end)
+		{
+
+			PushStack(&st, end);
+			PushStack(&st, key + 1);
+		}	
+	}
+
+}
 
