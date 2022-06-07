@@ -2,26 +2,39 @@
 #define CRT_SECURE_NO_WARNINGS
 #include<stdio.h>
 #include<stdlib.h>
+#include<stdio.h>
 #include<assert.h>
-
-//´òÓ¡array
+#include<string.h>
+#include"stack.h"
+//æ‰“å°array
 void PrintArray(int* a, int n);
 
-// ²åÈëÅÅĞò
+// æ’å…¥æ’åº
 void InsertSort(int* a, int n);
 
-// Ï£¶ûÅÅĞò
+// å¸Œå°”æ’åº
 void ShellSort(int* a, int n);
 
-//Ñ¡ÔñÅÅĞò
+//é€‰æ‹©æ’åº
 void SelectSort(int* a, int n);
 
-//¶ÑÅÅĞò
+//å †æ’åº
 void HeapSort(int* a, int n);
 
-// Ã°ÅİÅÅĞò
+// å†’æ³¡æ’åº
 void BubbleSort(int* a, int n);
 
-//¿ìÅÅ
+//å¿«æ’
 void QuickSort(int* a, int n);
 
+//å¿«æ’æ²¡æœ‰é€’å½’
+void QuickSortNonR(int* a, int n);
+
+//å½’å¹¶æ’åº
+void MergeSort(int* a, int n);
+ 
+//å½’å¹¶æ’åºéé€’å½’
+void MergeSortNonR(int* a, int n);
+
+//è®¡æ•°æ’åº
+void CountSort(int* a, int n);
