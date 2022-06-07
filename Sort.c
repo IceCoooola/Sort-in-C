@@ -124,7 +124,7 @@ void AdjustDwon(int* a, int n, int root)
 	while (child < n)
 	{
 		//选出最大的孩子
-		if(child +1 < n && a[child+1] > a[child])
+		if (child + 1 < n && a[child + 1] > a[child])
 		{
 			child++;
 		}
@@ -147,7 +147,7 @@ void HeapSort(int* a, int n)
 {
 	//先建堆
 	//最后一个父亲的节点是最后一个孩子的节点-1/2
-	for (int i = (n - 1 - 1) >> 1; i>=0 ;i--)
+	for (int i = (n - 1 - 1) >> 1; i >= 0; i--)
 	{
 		AdjustDwon(a, n, i);
 	}
@@ -164,9 +164,9 @@ void HeapSort(int* a, int n)
 // 冒泡排序
 void BubbleSort(int* a, int n)
 {
-	for (int i = 0; i < n-1; i++)
+	for (int i = 0; i < n - 1; i++)
 	{
-		for (int j = 0; j < n-1-i; j++)
+		for (int j = 0; j < n - 1 - i; j++)
 		{
 			if (a[j] > a[j + 1])
 			{
@@ -176,9 +176,34 @@ void BubbleSort(int* a, int n)
 	}
 }
 
+int findMid(int a, int b, int c)
+{
+	int large = a;
+	int small = a;
+	if(b > large)
+	{
+		large = b;
+	}
+	if (c > large)
+	{
+		large = c;
+	}
+	if (b < small)
+	{
+		small = b;
+	}
+	if (c < small)
+	{
+		small = c;
+	}
+	return a + b + c - large - small;
+}
+
 //hoare分治法
 int PartSort1(int* a, int left, int right)
 {
+	int midIndex = findMid(left, (left + right )/2, right);
+	Swap(&a[midIndex], &a[left]);
 	int key = a[left];
 	//选最左边的值当作key
 	int begin = left;
@@ -206,6 +231,8 @@ int PartSort1(int* a, int left, int right)
 //挖坑法
 int PartSort2(int* a, int left, int right)
 {
+	int midIndex = findMid(left, (left + right) / 2, right);
+	Swap(&a[midIndex], &a[left]);
 	//把最左边的位置当作坑
 	int key = a[left];
 	while (right > left)
@@ -228,6 +255,8 @@ int PartSort2(int* a, int left, int right)
 //前后指针法
 int PartSort3(int* a, int left, int right)
 {
+	int midIndex = findMid(left, (left + right) / 2, right);
+	Swap(&a[midIndex], &a[left]);
 	int key = a[left];
 	int prev = left;
 	int cur = left + 1;
@@ -258,14 +287,10 @@ void _QuickSort(int* a, int left, int right)
 //快排
 void QuickSort(int* a, int n)
 {
-	//_QuickSort(a, 0, n - 1);
-	QuickSortNonR(a, 0, n - 1);
+	_QuickSort(a, 0, n - 1);
 }
 
-
-
-//非递归快排
-void QuickSortNonR(int* a, int left, int right)
+void _QuickSortNonR(int* a, int left, int right)
 {
 	Stack st;
 	InitStack(&st);
@@ -295,3 +320,137 @@ void QuickSortNonR(int* a, int left, int right)
 
 }
 
+void QuickSortNonR(int* a, int n)
+{
+	_QuickSortNonR(a, 0, n - 1);
+}
+
+void Merge(int* a, int* temp, int begin1, int end1, int begin2, int end2)
+{
+	int i = begin1;
+	int j = begin1;
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (a[begin1] < a[begin2])
+		{
+			temp[i++] = a[begin1++];
+		}
+		else
+		{
+			temp[i++] = a[begin2++];
+		}
+	}
+	while (begin1 <= end1)
+	{
+		temp[i++] = a[begin1++];
+	}
+	while (begin2 <= end2)
+	{
+		temp[i++] = a[begin2++];
+	}
+	for (j; j <= end2; j++)
+	{
+		a[j] = temp[j];
+	}
+}
+
+void _MergeSort(int* a, int left, int right, int* temp)
+{
+
+	if (left >= right)
+	{
+		return;
+	}
+	int mid = (left + right) / 2;
+	//[left , mid]  [mid+1, right]
+	_MergeSort(a, left, mid, temp);
+	_MergeSort(a, mid + 1, right, temp);
+	//左右两段子区间归并，并且拷贝回去
+	int begin1 = left, end1 = mid, begin2 = mid + 1, end2 = right;
+	Merge(a, temp, begin1, end1, begin2, end2);
+}
+
+//归并排序
+void MergeSort(int* a, int n)
+{
+	int* temp = (int*)malloc(sizeof(int) * n);
+	if (temp == NULL)
+	{
+		exit(-1);
+	}
+	_MergeSort(a, 0, n - 1, temp);
+	//[0, mid]  [mid+1, n-1]
+	free(temp);
+}
+
+//归并排序非递归
+void MergeSortNonR(int* a, int n)
+{
+	int* temp = (int*)malloc(sizeof(int) * n);
+	if (temp == NULL)
+	{
+		exit(-1);
+	}
+	//设多个小区间，开始间隔为1
+	int gap = 1;
+	while (gap < n)
+	{
+		for (int i = 0; i < n; i += 2*gap)
+		{
+			//
+			int begin1 = i;
+			int end1 = i + gap - 1;
+			int begin2 = i + gap;
+			int end2 = i + gap + gap - 1;
+			if (end1 >= n)
+			{
+				break;
+			}
+			if (end2 >= n)
+			{
+				end2 = n - 1;
+			}
+			Merge(a, temp, begin1, end1, begin2, end2);
+		}
+		gap *= 2;
+	}
+	free(temp);
+}
+
+//计数排序
+void CountSort(int* a, int n)
+{
+	int large = a[0], small = a[0];
+	//遍历找出最小的和最大的值
+	for (int i = 1; i < n; i++)
+	{
+		if (a[i] > large)
+		{
+			large = a[i];
+		}
+		if (a[i] < small)
+		{
+			small = a[i];
+		}
+	}
+	int sz = large - small + 1;
+	int* count = (int*)malloc(sizeof(int) * (sz));
+	if (count == NULL)
+	{
+		exit(-1);
+	}
+	memset(count, 0, sizeof(int) * (sz));
+	for (int i = 0; i < n; i++)
+	{
+		count[a[i] - small]++;
+	}
+	int j = 0;
+	for (int i = 0; i < sz; i++)
+	{
+		while (count[i]--)
+		{
+			a[j++] = i + small;
+		}
+	}
+	free(count);
+}
